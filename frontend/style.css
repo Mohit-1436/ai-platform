@@ -1,0 +1,226 @@
+:root {
+    --bg-color: #f5f7fa;
+    --text-color: #000;
+    --box-bg: #fff;
+    --btn-bg-color: #007bff;
+    --btn-hover-bg: #0056b3;
+    --btn-text-color: #fff;
+}
+
+body.dark {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --box-bg: #1e1e1e;
+    --btn-bg-color: #2196f3;
+    --btn-hover-bg: #1769aa;
+}
+
+body {
+    font-family: "Segoe UI", sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: var(--btn-bg-color);
+    color: var(--btn-text-color);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.form-box {
+    background: var(--box-bg);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 50px auto;
+}
+
+.toggle-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.toggle-buttons button {
+    width: 48%;
+    padding: 10px;
+    border: none;
+    background-color: #eee;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.toggle-buttons .active {
+    background-color: var(--btn-bg-color);
+    color: var(--btn-text-color);
+}
+
+.form {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.form.active-form {
+    display: block;
+    opacity: 1;
+}
+
+input[type="email"],
+input[type="password"],
+textarea,
+input[type="number"],
+input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.checkbox-row {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    margin: 5px 0;
+}
+
+.checkbox-row label {
+    margin-left: 5px;
+}
+
+.primary-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--btn-bg-color);
+    color: var(--btn-text-color);
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.primary-btn:hover {
+    background-color: var(--btn-hover-bg);
+}
+
+.social-login {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f1f1;
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn img {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+.link-row {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+.link-row a {
+    color: var(--btn-bg-color);
+    text-decoration: none;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background: var(--box-bg);
+    color: var(--text-color);
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.content-section {
+    padding: 20px;
+    background: var(--box-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+@media (max-width: 500px) {
+    .modal-content {
+        width: 90%;
+        padding: 15px;
+    }
+    .theme-toggle {
+        top: 10px;
+        right: 10px;
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+    .container {
+        padding: 10px;
+    }
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Financial Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="theme-toggle" onclick="toggleTheme()">🌓</div>
+
+    <div class="container">
+        <!-- Authentication Section -->
+        <div id="authSection" class="form-box">
+            <div class="toggle-buttons">
+                <button id="loginBtn" class="active" onclick="showLogin()">Login</button>
+                <button id="signupBtn" onclick="showSignup()">Signup</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="form active-form" onsubmit="return validateLogin(event)">
+                <h2>Login</h2>
+                <input type="email" id="loginEmail" placeholder="Email" required>
+                <div class="password-wrapper">
+                    <input type="password" id="loginPassword" placeholder="Password" required>
+                    <span class="toggle-password" onclick="togglePassword('loginPassword')">👁</span>
+                </div>
+                <div class="checkbox-row">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Remember me</label>
+                </div>
+                <button class="primary-btn" type="submit">Login</button>
+                <div class="link-row">Don't have an account? <a href="#" onclick="showSignup()">Sign up</a></div>
+            </form>
+
+            <!-- Signup Form -->
+            <form id="signupForm" class="form" onsubmit="return validateSignup(event)">
+                <h2>Register a new account</h2>
+                <input type="email" id="signupEmail" placeholder="Email" required>
+                <div class="password-wrapper">
+                    <input type="password" id="signupPassword" placeholder="Password" required>
+                    <span class="toggle-password" onclick="togglePassword('signupPassword')">👁</span>
+                </div>
+                <div class="password-wrapper">
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                    <span class="toggle-password" onclick="togglePassword('confirmPassword')">👁</span>
+                </div>
+                <div class="checkbox-row">
+                    <input type="checkbox" id="privacyPolicy" required>
+                    <label for="privacyPolicy">I agree to the Privacy Policy</label>
+                </div>
+                <div class="checkbox-row">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">I agree to the Terms and Conditions</label>
+                </div>
+                <button class="primary-btn" type="submit">Register</button>
+                <div class="link-row">Already have an account? <a href="#" onclick="showLogin()">Login</a></div>
+            </form>
+        </div>
+
+        <!-- Main Content (Hidden until logged in) -->
+        <div id="mainContent" class="container mt-5" style="display: none;">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">AI Financial Platform</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('home')">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('sentiment')">Sentiment Analysis</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('allocation')">Live Allocation</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('backtest')">Backtest</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" onclick="logout()">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Home Section -->
+            <section id="home" class="content-section">
+                <h1>Welcome to AI Financial Platform</h1>
+                <p>Anticipate financial turbulence and optimize your portfolio with cutting-edge AI tools.</p>
+                <p><strong>Disclaimer:</strong> This is not financial advice; use at your own risk.</p>
+            </section>
+            <!-- Sentiment Analysis Section -->
+            <section id="sentiment" class="content-section" style="display: none;">
+                <h2>Sentiment Analysis</h2>
+                <textarea id="sentimentInput" placeholder="Paste a news headline or tweet..." rows="4" class="form-control mb-3"></textarea>
+                <button class="btn btn-primary" onclick="analyzeSentiment()">Analyze</button>
+                <div id="sentimentResult" class="mt-3"></div>
+            </section>
+            <!-- Live Allocation Section -->
+            <section id="allocation" class="content-section" style="display: none;">
+                <h2>Live Portfolio Allocation</h2>
+                <textarea id="allocationInput" placeholder="Enter headline or tweet..." rows="4" class="form-control mb-3"></textarea>
+                <div class="mb-3">
+                    <label for="avgReturn" class="form-label">7-day Avg Return (%)</label>
+                    <input type="number" id="avgReturn" step="0.01" class="form-control" value="0.05">
+                </div>
+                <div class="mb-3">
+                    <label for="cluster" class="form-label">Market Cluster (0-3)</label>
+                    <input type="number" id="cluster" min="0" max="3" class="form-control" value="1">
+                </div>
+                <button class="btn btn-primary" onclick="predictAllocation()">Predict Allocation</button>
+                <div id="allocationResult" class="mt-3"></div>
+            </section>
+            <!-- Backtest Section -->
+            <section id="backtest" class="content-section" style="display: none;">
+                <h2>Backtesting Dashboard</h2>
+                <div class="mb-3">
+                    <label for="startDate" class="form-label">Start Date</label>
+                    <input type="date" id="startDate" class="form-control" value="2023-01-01">
+                </div>
+                <div class="mb-3">
+                    <label for="endDate" class="form-label">End Date</label>
+                    <input type="date" id="endDate" class="form-control" value="2023-06-01">
+                </div>
+                <button class="btn btn-primary" onclick="runBacktest()">Run Backtest</button>
+                <div id="backtestResult" class="mt-3"></div>
+            </section>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

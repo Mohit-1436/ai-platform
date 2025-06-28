@@ -1,0 +1,9 @@
+flask
+transformers
+torch
+stable-baselines3
+gym
+pandas
+numpy
+requests
+python-dotenv
